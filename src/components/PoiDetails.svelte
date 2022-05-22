@@ -1,0 +1,17 @@
+<script lang="ts">
+  import type { Poi } from '../data/PoiStore';
+
+  export let poi: Poi;
+</script>
+
+<div class="box box-link-hover-shadow">
+  <h2 class="title">{poi.name}</h2>
+  <p>{poi.category}</p>
+  <p>Lat: {poi.lat}, Long: {poi.lng}</p>
+  <p>{poi.desc}</p>
+  <a href="/pois/{poi._id}/edit" class="button">
+      <span class="icon is-small">
+        <i class="fas fa-edit"></i>
+      </span>
+  </a>
+</div>
