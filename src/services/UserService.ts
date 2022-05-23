@@ -8,16 +8,16 @@ export class UserService {
 		this.baseUrl = baseUrl + '/api/users';
 	}
 
-	async find() {
+	async find(): Promise<User[]> {
 		try {
 			const response = await axios.get<User[]>(this.baseUrl);
 			if (response.data) {
 				users.set(response.data);
 				return response.data;
 			}
-			return null;
+			return [];
 		} catch (error) {
-			return null;
+			return [];
 		}
 	}
 

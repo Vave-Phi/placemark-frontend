@@ -3,6 +3,7 @@ import { writable } from 'svelte/store';
 export interface CurrentUser {
 	email: string;
 	token: string;
+	isAdmin: boolean;
 }
 
 export interface RegisterUser {
@@ -10,15 +11,17 @@ export interface RegisterUser {
 	password: string;
 	firstName: string;
 	lastName: string;
+	isAdmin: boolean;
 }
 
-export type LoginUser = Omit<RegisterUser, 'firstName' | 'lastName'>;
+export type LoginUser = Omit<RegisterUser, 'firstName' | 'lastName' | 'isAdmin'>;
 
-export type User = Omit<RegisterUser, 'password'> & { _id: string };
+export type User = Omit<RegisterUser, 'password' | 'isAdmin'> & { _id: string };
 
 export const currentUser = writable<CurrentUser>({
 	email: '',
 	token: '',
+	isAdmin: false,
 });
 
 export const users = writable<User[]>([]);

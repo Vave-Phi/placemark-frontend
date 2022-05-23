@@ -1,7 +1,13 @@
 <script lang="ts">
   import type { User } from '../data/UserStore';
+  import { createEventDispatcher } from 'svelte';
 
   export let users: User[] = [];
+  const dispatch = createEventDispatcher();
+
+  async function forward(id: string) {
+    dispatch('delete', {id});
+  }
 </script>
 
 {#each users as user}
@@ -10,7 +16,7 @@
       {user.firstName} {user.lastName}
     </h2>
     <span>E-Mail: {user.email}</span>
-    <a href="/admin/delete/{user._id}" class="button">
+    <a on:click={forward(user._id)} class="button">
         <span class="icon is-small">
           <i class="fas fa-trash"></i>
         </span>

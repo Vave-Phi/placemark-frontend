@@ -4,14 +4,15 @@
   import Home from "./pages/Home.svelte";
 
   import Router from "svelte-spa-router";
-  import {setContext} from "svelte";
+  import {onMount, setContext} from "svelte";
 
-  import {AuthService} from "./services/AuthService.js";
-  import {PoiService} from "./services/PoiService.js";
+  import {AuthService} from "./services/AuthService.ts";
+  import {PoiService} from "./services/PoiService.ts";
   import Admin from "./pages/Admin.svelte";
-  import PoiDetails from "./components/PoiDetails.svelte";
+  import PoiDetails from "./pages/PoiDetails.svelte";
   import PoiEdit from "./pages/PoiEdit.svelte";
-  import Error from "./components/Error.svelte";
+  import {UserService} from "./services/UserService.ts";
+  import {currentUser} from "./data/UserStore.ts";
 
   let routes = {
     "/": Home,
@@ -19,16 +20,23 @@
     "/signup": Signup,
     "/pois": Home,
     "/admin": Admin,
-    "/logout": Home,
-    "/poi/{id}": PoiDetails,
-    "/poi/{id}/edit": PoiEdit,
+    "/pois/:id": PoiDetails,
+    "/pois/:id/edit": PoiEdit,
   }
-  setContext("AuthService", new AuthService());
-  setContext("PoiService", new PoiService());
+  let authService = new AuthService('http://localhost:3001');
+  setContext("AuthService", authService);
+  setContext("PoiService", new PoiService('http://localhost:3001'));
+  setContext("UserService", new UserService('http://localhost:3001'));
+
+  onMount(async () => {
+    const isAdmin = await authService.isAdmin()
+    currentUser.update(it => {
+      return {...it, isAdmin};
+    })
+  })
 
 </script>
 
 <div>
   <Router {routes}/>
-  <Error errors={[]}/>
 </div>

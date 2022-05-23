@@ -6,10 +6,11 @@
 
 <div class="box box-link-hover-shadow">
   <h2 class="title">{poi.name}</h2>
-  <p>{poi.category}</p>
-  <p>Lat: {poi.lat}, Long: {poi.lng}</p>
-  <p>{poi.desc}</p>
-  <a href="/pois/{poi._id}/edit" class="button">
+  <p>{poi.category ?? '-'}</p>
+  {#if poi.lat}<p>Lat: {poi.lat}</p> {/if}
+  {#if poi.lng}<p>Long: {poi.lng}</p> {/if}
+  <p class="pb-3">{poi.desc ?? '-'}</p>
+  <a href="/#/pois/{poi._id}/edit" class="button">
       <span class="icon is-small">
         <i class="fas fa-edit"></i>
       </span>

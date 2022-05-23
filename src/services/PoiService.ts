@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { Poi, PoiInput } from '../data/PoiStore';
-import { upsertPoi, pois, deletePoi } from '../data/PoiStore';
+import { deletePoi, pois, upsertPoi } from '../data/PoiStore';
 
 export class PoiService {
 	baseUrl = '';
@@ -9,20 +9,20 @@ export class PoiService {
 		this.baseUrl = baseUrl + '/api/pois';
 	}
 
-	async find() {
+	async find(filter?: { name: string; category: string }): Promise<Poi[]> {
 		try {
-			const response = await axios.get<Poi[]>(this.baseUrl);
+			const response = await axios.get<Poi[]>(this.baseUrl, { params: filter });
 			if (response.data) {
 				pois.set(response.data);
 				return response.data;
 			}
-			return null;
+			return [];
 		} catch (error) {
-			return null;
+			return [];
 		}
 	}
 
-	async findOne(id: string) {
+	async findOne(id: string): Promise<Poi | null> {
 		try {
 			const response = await axios.get<Poi>(`${this.baseUrl}/${id}`);
 			const poi = response.data;
@@ -36,9 +36,9 @@ export class PoiService {
 		}
 	}
 
-	async create(poi: PoiInput) {
+	async create(poi: PoiInput): Promise<Poi | null> {
 		try {
-			const response = await axios.post<Poi>(`${this.baseUrl}/`, poi);
+			const response = await axios.post<Poi>(`${this.baseUrl}`, poi);
 			const newPoi = response.data;
 			if (newPoi) {
 				upsertPoi(newPoi);

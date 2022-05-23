@@ -1,4 +1,4 @@
-import { currentUser, CurrentUser, RegisterUser, LoginUser } from '../data/UserStore';
+import { currentUser, CurrentUser, LoginUser, RegisterUser } from '../data/UserStore';
 import axios from 'axios';
 
 export class AuthService {
@@ -9,24 +9,27 @@ export class AuthService {
 		const credentials = localStorage.placemark;
 		if (credentials) {
 			const savedUser: CurrentUser = JSON.parse(credentials);
+			axios.defaults.headers.common.Authorization = 'Bearer ' + savedUser.token;
 			currentUser.set({
 				email: savedUser.email,
 				token: savedUser.token,
+				isAdmin: false,
 			});
-			axios.defaults.headers.common.Authorization = 'Bearer ' + savedUser.token;
 		}
 	}
 
 	async login(user: LoginUser) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/api/users/authenticate`, user);
+			const isAdmin = await this.isAdmin();
 			axios.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
 			if (response.data.success) {
 				currentUser.set({
 					email: user.email,
 					token: response.data.token,
+					isAdmin,
 				});
-				localStorage.donation = JSON.stringify({
+				localStorage.placemark = JSON.stringify({
 					email: user.email,
 					token: response.data.token,
 				});
@@ -39,7 +42,11 @@ export class AuthService {
 	}
 
 	async logout() {
-		currentUser.set({ email: '', token: '' });
+		currentUser.set({
+			email: '',
+			token: '',
+			isAdmin: false,
+		});
 		axios.defaults.headers.common.Authorization = '';
 		localStorage.removeItem('placemark');
 	}
@@ -48,6 +55,16 @@ export class AuthService {
 		try {
 			await axios.post(this.baseUrl + '/api/users', newUser);
 			return true;
+		} catch (error) {
+			return false;
+		}
+	}
+
+	async isAdmin(): Promise<boolean> {
+		try {
+			const response = await axios.get<boolean>(this.baseUrl + '/api/users/isadmin');
+			console.log(response.data);
+			return response.data;
 		} catch (error) {
 			return false;
 		}
