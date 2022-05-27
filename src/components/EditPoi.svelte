@@ -22,15 +22,17 @@
     <input bind:value={poi.name} class="input" type="text" placeholder="Enter POI name" name="name">
   </div>
   <div class="columns">
-    <div class="column is-one-quarter-desktop is-one-quarter-tablet field">
+    <div class="column is-half field">
       <label class="label">Latitude</label>
       <input bind:value={poi.lat} class="input" type="text" placeholder="Enter latitude" name="lat">
     </div>
-    <div class="column is-one-quarter-desktop is-one-quarter-tablet field">
+    <div class="column is-half field">
       <label class="label">Longitude</label>
       <input bind:value={poi.lng} class="input" type="text" placeholder="Enter longitude" name="lng">
     </div>
-    <div class="column field is-half-desktop is-half-tablet is-full-mobile">
+  </div>
+  <div class="columns">
+    <div class="column field is-full">
       <label class="label">Category</label>
       <div class="select is-fullwidth">
         <select name="category" bind:value={poi.category}>

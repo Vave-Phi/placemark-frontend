@@ -77,14 +77,29 @@ export class PoiService {
 		}
 	}
 
-	async deleteAll() {
+	async uploadImage(id: string, image: FileList) {
 		try {
-			const response = await axios.delete(`${this.baseUrl}`);
-			if (response.status === 204) {
-				pois.set([]);
-				return true;
+			const formData = new FormData();
+			formData.append('image', image.item(0));
+			console.log(formData);
+			const response = await axios.post(`${this.baseUrl}/${id}/image`, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			});
+			if (response.status === 200) {
+				return response.data;
 			}
-			return false;
+			return null;
+		} catch (error) {
+			return null;
+		}
+	}
+
+	async deleteImage(id: string) {
+		try {
+			const response = await axios.delete(`${this.baseUrl}/${id}/image`);
+			return response.status === 204;
 		} catch (error) {
 			return false;
 		}

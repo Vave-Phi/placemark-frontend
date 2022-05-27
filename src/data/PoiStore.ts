@@ -8,6 +8,7 @@ export interface Poi {
 	category?: PoiCategory;
 	lat?: number;
 	lng?: number;
+	img?: string;
 }
 
 export type PoiInput = Omit<Poi, '_id'>;

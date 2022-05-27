@@ -4,6 +4,7 @@
   import { PoiService } from "../services/PoiService.ts";
   import { getContext, onMount } from "svelte";
   import { Poi } from "../data/PoiStore.ts";
+  import ImageUpload from "../components/ImageUpload.svelte";
 
   export let params;
   const poiService: PoiService = getContext("PoiService");
@@ -14,21 +15,43 @@
   });
 
   async function update(event) {
-    const poi: Poi = event.detail.poi;
-    const id = poi._id;
+    const newPoi: Poi = event.detail.poi;
+    const id = newPoi._id;
     await poiService.update(id, {
-      name: poi.name,
-      desc: poi.desc,
-      category: poi.category,
-      lat: poi.lat,
-      lng: poi.lng,
+      name: newPoi.name,
+      desc: newPoi.desc,
+      category: newPoi.category,
+      lat: newPoi.lat,
+      lng: newPoi.lng,
     });
   }
+
+  async function uploadImage(event) {
+    const {id, image}: Poi = event.detail;
+    const url = await poiService.uploadImage(id, image);
+    if (url) {
+      poi.img = url;
+    }
+  }
+
+  async function deleteImage(event) {
+    const {id}: Poi = event.detail;
+    await poiService.deleteImage(id);
+    poi.img = null;
+  }
+
 </script>
 
 <PlacemarkMenu active="pois"/>
 <section class="section">
   {#if poi}
-    <EditPoi {poi} on:update={update}/>
+    <section class="columns">
+      <div class="column is-half">
+        <EditPoi {poi} on:update={update}/>
+      </div>
+      <div class="column is-half">
+        <ImageUpload {poi} on:upload={uploadImage} on:delete={deleteImage}/>
+      </div>
+    </section>
   {/if}
 </section>
