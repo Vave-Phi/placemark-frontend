@@ -1,12 +1,12 @@
 <script lang="ts">
   import type { Poi } from '../data/PoiStore';
-  import { PoiCategory } from '../data/enums/PoiCategory';
+  import { Category } from '../data/enums/Category';
   import { createEventDispatcher } from 'svelte';
   import { push } from 'svelte-spa-router';
   import { enumKeys } from '../data/enums/EnumUtils';
 
   export let poi: Poi;
-  const options: string[] = enumKeys(PoiCategory);
+  const options: string[] = enumKeys(Category);
   const dispatch = createEventDispatcher();
 
   async function forward() {

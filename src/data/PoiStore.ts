@@ -1,11 +1,11 @@
 import { writable } from 'svelte/store';
-import type { PoiCategory } from './enums/PoiCategory';
+import type { Category } from './enums/Category';
 
 export interface Poi {
 	_id: string;
 	name: string;
 	desc?: string;
-	category?: PoiCategory;
+	category?: Category;
 	lat?: number;
 	lng?: number;
 	img?: string;

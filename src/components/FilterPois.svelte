@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { PoiCategory } from '../data/enums/PoiCategory';
+  import { Category } from '../data/enums/Category';
   import { createEventDispatcher } from 'svelte';
   import { enumKeys } from '../data/enums/EnumUtils';
 
-  const options: string[] = enumKeys(PoiCategory);
+  const options: string[] = enumKeys(Category);
   const query: { name: string; category: string } = {name: '', category: ''};
   const dispatch = createEventDispatcher();
 

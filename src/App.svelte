@@ -13,6 +13,7 @@
   import PoiEdit from "./pages/PoiEdit.svelte";
   import {UserService} from "./services/UserService.ts";
   import {currentUser} from "./data/UserStore.ts";
+  import PoiMap from "./pages/PoiMap.svelte";
 
   let routes = {
     "/": Home,
@@ -22,6 +23,7 @@
     "/admin": Admin,
     "/pois/:id": PoiDetails,
     "/pois/:id/edit": PoiEdit,
+    "/map": PoiMap,
   }
   let authService = new AuthService('http://localhost:3001');
   setContext("AuthService", authService);

@@ -35,7 +35,6 @@
 </script>
 
 <PlacemarkMenu active="pois"/>
-
 <section class="section">
   <FilterPois on:filter={filter}/>
   <ListPois {pois} on:delete={remove}/>

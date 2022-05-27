@@ -1,4 +1,4 @@
-export enum PoiCategory {
+export enum Category {
 	University,
 	Sight,
 	Bridge,

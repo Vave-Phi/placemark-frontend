@@ -28,6 +28,7 @@
       <div class="navbar-item">
         <div class="buttons">
           <a id="pois" class="button" href="/#/pois"> POIs </a>
+          <a id="map" class="button" href="/#/map"> Map </a>
           {#if $currentUser.isAdmin}<a id="admin" class="button" href="/#/admin"> Admin </a>{/if}
           <a id="logout" class="button" on:click={logout}> Logout </a>
         </div>

@@ -18,6 +18,8 @@
     </a>
   </div>
   <div class="column is-half">
-    <img class="image" src={poi.img} alt="Poi image">
+    {#if poi.img}
+      <img class="image" src={poi.img} alt="Poi image">
+    {/if}
   </div>
 </div>
