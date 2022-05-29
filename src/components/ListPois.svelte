@@ -15,6 +15,7 @@
     <h2 class="title">
       {poi.name}
     </h2>
+    <p class="mb-4">{poi.desc ?? '-'}</p>
     <a href="/#/pois/{poi._id}" class="button">
         <span class="icon is-small">
           <i class="fas fa-folder-open"></i>

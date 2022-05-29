@@ -11,7 +11,14 @@
     {#if poi.lat}<p>Lat: {poi.lat}</p> {/if}
     {#if poi.lng}<p>Long: {poi.lng}</p> {/if}
     <p class="pb-3">{poi.desc ?? '-'}</p>
-    <a href="/#/pois/{poi._id}/edit" class="button">
+    {#if poi.weather}
+      <h3 class="title is-4">Weather</h3>
+      <p>Weather: {poi.weather.weather[0].description}</p>
+      <p>Temperature: {poi.weather.main.temp}°C</p>
+      <p>Windspeed: {poi.weather.wind.speed}km/h</p>
+      <p>Humidity: {poi.weather.main.humidity}%</p>
+    {/if}
+    <a href="/#/pois/{poi._id}/edit" class="button mt-4">
       <span class="icon is-small">
         <i class="fas fa-edit"></i>
       </span>

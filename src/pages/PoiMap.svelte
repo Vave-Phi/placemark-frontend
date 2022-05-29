@@ -27,7 +27,7 @@
 
 <PlacemarkMenu active="map"/>
 {#if loaded}
-  <div class="columns is-vcentered">
+  <div class="columns">
     <div class="column has-text-centered">
       <Map items={pois} bind:this={poiMap}></Map>
     </div>

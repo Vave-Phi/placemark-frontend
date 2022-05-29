@@ -10,7 +10,7 @@
   }
 </script>
 
-<form on:submit|preventDefault={forward}>
+<form class="mb-4" on:submit|preventDefault={forward}>
   <div class="field">
     <label class="label">POI Name</label>
     <input bind:value={poi.name} class="input" type="text" placeholder="Enter POI name" name="name">
