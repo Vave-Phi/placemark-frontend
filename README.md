@@ -1,2 +1,11 @@
-# placemark-frontend
-Svelte Frontend of the Placemark graded project
+Placemark
+Placemark is a graded assignment for the Advanced Full Stack Web Development course at OTH Regensburg.
+This project contains the website's frontend written in TypeScript using svelte.
+
+Placemark is a website which allows to contribute to a list of Points of Interest (PoI), as well as to view other PoIs.
+
+Usage
+Can be accessed via any modern web browser. Requires login via basic authentication.
+
+Credits
+This project was created by Philipp Bachfischer as a graded assignment for the Advanced Full Stack Web Development course at OTH Regensburg.
