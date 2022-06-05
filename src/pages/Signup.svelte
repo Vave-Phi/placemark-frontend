@@ -19,7 +19,7 @@
 <section class="columns">
   <div class="column is-half-desktop p-6 is-flex is-flex-direction-column is-align-items-stretch">
     <div class="is-flex is-justify-content-center">
-      <img class="image is-180x180" src="src/assets/placemark.png" alt="Placemark logo">
+      <img class="image is-180x180" src="/public/assets/placemark.png" alt="Placemark logo">
     </div>
     <h1 class="title has-text-centered">Sign up</h1>
     <form on:submit|preventDefault={signup}>
@@ -55,7 +55,7 @@
     </form>
   </div>
   <div class="column is-half-desktop is-hidden-mobile p-0">
-    <img class="background-img" src="src/assets/gps-location.svg" alt="map">
+    <img class="background-img" src="/public/assets/gps-location.svg" alt="map">
   </div>
 </section>
 
