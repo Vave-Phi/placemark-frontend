@@ -10,11 +10,10 @@
   }
 </script>
 
+<h2 class="title">Placemark Users</h2>
 {#each users as user}
   <div class="box box-link-hover-shadow">
-    <h2 class="title">
-      {user.firstName} {user.lastName}
-    </h2>
+    <h2 class="title">{user.firstName} {user.lastName}</h2>
     <span>E-Mail: {user.email}</span>
     <a on:click={forward(user._id)} class="button">
         <span class="icon is-small">

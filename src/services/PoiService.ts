@@ -64,6 +64,14 @@ export class PoiService {
 		}
 	}
 
+	async updateVisited(id: string) {
+		try {
+			await axios.put<Poi>(`${this.baseUrl}/${id}/visited`, {});
+		} catch (error) {
+			return;
+		}
+	}
+
 	async delete(id: string) {
 		try {
 			const response = await axios.delete(`${this.baseUrl}/${id}`);

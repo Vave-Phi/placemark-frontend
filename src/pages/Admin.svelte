@@ -4,12 +4,19 @@
   import { UserService } from "../services/UserService.ts";
   import { getContext, onMount } from "svelte";
   import { User } from "../data/UserStore.ts";
+  import AdminAnalytics from "../components/AdminAnalytics.svelte";
+  import { PoiService } from '../services/PoiService';
+  import type { Poi } from '../data/PoiStore';
 
   const userService: UserService = getContext("UserService");
+  const poiService: PoiService = getContext("PoiService");
+
   let users: User[];
+  let pois: Poi[];
 
   onMount(async () => {
     users = await userService.find();
+    pois = await poiService.find();
   });
 
   async function remove(event) {
@@ -24,6 +31,9 @@
 <PlacemarkMenu active="admin"/>
 
 <section class="section">
-  <ListUsers {users} on:delete={remove}/>
+  {#if users && pois}
+    <AdminAnalytics pois="{pois}" users="{users}"/>
+    <ListUsers {users} on:delete={remove}/>
+  {/if}
 </section>
 

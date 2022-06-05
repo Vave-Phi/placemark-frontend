@@ -1,7 +1,16 @@
 <script lang="ts">
   import type { Poi } from '../data/PoiStore';
+  import { createEventDispatcher } from 'svelte';
 
   export let poi: Poi;
+  let clicked = false;
+  const dispatch = createEventDispatcher();
+
+  async function forward(id: string) {
+    clicked = true;
+    poi.visitedAmount = poi.visitedAmount ? poi.visitedAmount + 1 : 1;
+    dispatch('visited', {id});
+  }
 </script>
 
 <div class="box box-link-hover-shadow columns">
@@ -23,6 +32,12 @@
         <i class="fas fa-edit"></i>
       </span>
     </a>
+    <button on:click={forward(poi._id)} disabled="{clicked}" class="button mt-4">
+        <span class="icon is-small">
+          <i class="fas fa-plus"></i>
+        </span>
+      <span>Visited by: {poi.visitedAmount ?? 0}</span>
+    </button>
   </div>
   <div class="column is-half">
     {#if poi.img}

@@ -13,12 +13,16 @@
     poi = await poiService.findOne(params.id);
   });
 
+  async function updateVisited(event) {
+    await poiService.updateVisited(event.detail.id);
+  }
+
 </script>
 
 <PlacemarkMenu active="pois"/>
 
 <section class="section">
   {#if poi}
-    <PoiDetailsData poi="{poi}"/>
+    <PoiDetailsData poi="{poi}" on:visited={updateVisited}/>
   {/if}
 </section>

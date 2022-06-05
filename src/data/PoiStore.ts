@@ -1,15 +1,16 @@
 import { writable } from 'svelte/store';
-import type { Category } from './enums/Category';
 
 export interface Poi {
 	_id: string;
 	name: string;
 	desc?: string;
-	category?: Category;
+	category?: string;
 	lat?: number;
 	lng?: number;
+	visitedAmount?: number;
 	img?: string;
 	weather: Weather;
+	creator: string;
 }
 
 export type PoiInput = Omit<Poi, '_id'>;

@@ -31,10 +31,8 @@
   setContext("UserService", new UserService('http://localhost:3001'));
 
   onMount(async () => {
-    const isAdmin = await authService.isAdmin()
-    currentUser.update(it => {
-      return {...it, isAdmin};
-    })
+    const isAdmin = await authService.isAdmin();
+    currentUser.update(it => ({...it, isAdmin}));
   })
 
 </script>

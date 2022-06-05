@@ -2,6 +2,7 @@
   import { getContext } from "svelte";
   import { push } from "svelte-spa-router";
   import type { LoginUser } from '../data/UserStore';
+  import { currentUser } from '../data/UserStore';
 
   let user: LoginUser = {email: '', password: ''};
   const authService = getContext("AuthService");
@@ -9,6 +10,8 @@
   async function login() {
     let success = await authService.login(user)
     if (success) {
+      const isAdmin = await authService.isAdmin();
+      currentUser.update(it => ({...it, isAdmin}));
       push("/pois");
     } else {
       user = {email: '', password: ''}
