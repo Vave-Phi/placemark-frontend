@@ -1,5 +1,5 @@
 <script lang="ts">
-  import 'leaflet/dist/leaflet.css';
+  // import 'leaflet/dist/leaflet.css';
   import { LeafletMap } from '../services/LeafletMap.js';
   import { onMount } from "svelte";
   import { Category } from '../data/enums/Category';

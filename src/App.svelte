@@ -25,10 +25,10 @@
     "/pois/:id/edit": PoiEdit,
     "/map": PoiMap,
   }
-  let authService = new AuthService('http://localhost:3001');
+  let authService = new AuthService('https://placemark-2022.herokuapp.com/');
   setContext("AuthService", authService);
-  setContext("PoiService", new PoiService('http://localhost:3001'));
-  setContext("UserService", new UserService('http://localhost:3001'));
+  setContext("PoiService", new PoiService('https://placemark-2022.herokuapp.com/'));
+  setContext("UserService", new UserService('https://placemark-2022.herokuapp.com/'));
 
   onMount(async () => {
     const isAdmin = await authService.isAdmin();
