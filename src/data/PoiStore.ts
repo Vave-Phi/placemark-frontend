@@ -9,6 +9,7 @@ export interface Poi {
 	lng?: number;
 	visitedAmount?: number;
 	img?: string;
+	gallery?: string[];
 	weather: Weather;
 	creator: string;
 }

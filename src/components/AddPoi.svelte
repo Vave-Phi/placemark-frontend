@@ -2,11 +2,12 @@
   import type { PoiInput } from '../data/PoiStore';
   import { createEventDispatcher } from 'svelte';
 
-  const poi: PoiInput = {name: '', lat: null, lng: null};
+  let poi: PoiInput = {name: '', lat: null, lng: null};
   const dispatch = createEventDispatcher();
 
   async function forward() {
     dispatch('create', {poi});
+    poi = {name: '', lat: null, lng: null};
   }
 </script>
 

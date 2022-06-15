@@ -50,7 +50,7 @@ export class PoiService {
 		}
 	}
 
-	async update(id: string, poi: PoiInput) {
+	async update(id: string, poi: Partial<PoiInput>) {
 		try {
 			const response = await axios.put<Poi>(`${this.baseUrl}/${id}`, poi);
 			const newPoi = response.data;
@@ -89,7 +89,6 @@ export class PoiService {
 		try {
 			const formData = new FormData();
 			formData.append('image', image.item(0));
-			console.log(formData);
 			const response = await axios.post(`${this.baseUrl}/${id}/image`, formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
@@ -104,9 +103,9 @@ export class PoiService {
 		}
 	}
 
-	async deleteImage(id: string) {
+	async deleteImage(id: string, url: string) {
 		try {
-			const response = await axios.delete(`${this.baseUrl}/${id}/image`);
+			const response = await axios.delete(`${this.baseUrl}/${id}/image`, { params: { url } });
 			return response.status === 204;
 		} catch (error) {
 			return false;

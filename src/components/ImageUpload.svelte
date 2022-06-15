@@ -5,6 +5,7 @@
   export let poi: Poi;
   let fileName = '';
   let image: FileList;
+  let i = 0;
   const dispatch = createEventDispatcher();
 
   async function upload() {
@@ -20,17 +21,32 @@
   }
 
   async function remove() {
-    dispatch('delete', {id: poi._id});
+    dispatch('delete', {id: poi._id, url: poi.gallery[i]});
+    i = Math.max(Math.min(i, poi.gallery.length - 1), 0);
   }
 
 </script>
 
 <div class="card">
-  <div class="card-image">
-    <figure class="image">
-      <img src={poi.img}>
-    </figure>
-  </div>
+  {#if poi.gallery?.length}
+    <div>
+      <div class="card-image">
+        <figure class="image noselect">
+          {#if i > 0}
+            <div class="carousel previous is-fullheight is-align-items-center is-flex pl-2 pr-2" on:click={() => i--}>
+              <span class="icon is-small"><i class="fas fa-chevron-left"></i></span>
+            </div>
+          {/if}
+          <img src={poi.gallery[i]}>
+          {#if i < poi.gallery.length - 1}
+            <div class="carousel next is-fullheight is-align-items-center is-flex pl-2 pr-2" on:click={() => i++}>
+              <span class="icon is-small"><i class="fas fa-chevron-right"></i></span>
+            </div>
+          {/if}
+        </figure>
+      </div>
+    </div>
+  {/if}
   <div class="card-content">
     <form on:submit|preventDefault={upload}>
       <div id="file-select" class="file has-name is-fullwidth">
@@ -47,10 +63,41 @@
           <span class="file-name">{fileName}</span>
         </label>
         <button type="submit" class="button is-info">Upload</button>
-        {#if poi.img}
+        {#if poi.gallery?.[i]}
           <button type="button" class="button is-danger" on:click={remove}>Delete</button>
         {/if}
       </div>
     </form>
   </div>
 </div>
+
+<style>
+    .previous {
+        z-index: 2;
+    }
+
+    .next {
+        z-index: 2;
+        right: 0;
+    }
+
+    .carousel {
+        background-color: rgba(0, 0, 0, 0.3);
+        color: white;
+        position: absolute;
+        top: 0;
+        height: 100%;
+    }
+
+    .is-fullheight {
+        height: 100%
+    }
+
+    .noselect {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+</style>

@@ -7,12 +7,17 @@
   import type { Poi } from '../data/PoiStore';
 
   export let items: Poi[] = [];
+  export let id = 'map1';
+  export let baseLayer = 'Terrain';
+  export let height = 600;
+  export let lat = 49.01643;
+  export let lng = 12.10176;
 
   let map = null;
   const categories = enumKeys(Category);
   const mapConfig = {
-    location: {lat: 49.01643, lng: 12.10176},
-    zoom: 8,
+    location: {lat, lng},
+    zoom: 12,
     minZoom: 1,
   };
 
@@ -22,7 +27,7 @@
   }
 
   onMount(async () => {
-    map = new LeafletMap("map-host", mapConfig);
+    map = new LeafletMap(id, mapConfig, baseLayer);
     map.showZoomControl();
     categories.forEach(it => map.addLayerGroup(it));
     map.showLayerControl();
@@ -31,4 +36,4 @@
 </script>
 
 
-<div class="box" id="map-host" style="height:800px"></div>
+<div class="box" id="{id}" style="height: {height + 'px'}"></div>

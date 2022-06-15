@@ -32,7 +32,7 @@
       <Map items={pois} bind:this={poiMap}></Map>
     </div>
     <div class="column box has-text-centered">
-      <h1 class="title is-4">Add a POI!</h1>
+      <h1 class="title is-4">Add a POI</h1>
       <AddPoi on:create={create}></AddPoi>
     </div>
   </div>
