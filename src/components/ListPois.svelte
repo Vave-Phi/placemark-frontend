@@ -11,20 +11,25 @@
 </script>
 
 {#each pois as poi}
-  <div class="box box-link-hover-shadow">
-    <h2 class="title">
-      {poi.name}
-    </h2>
-    <p class="mb-4">{poi.desc ?? '-'}</p>
-    <a href="/#/pois/{poi._id}" class="button">
+  <div class="box box-link-hover-shadow is-flex is-justify-content-space-between">
+    <div class="pr-5">
+      <h2 class="title">
+        {poi.name}
+      </h2>
+      <p class="mb-4">{poi.desc ?? '-'}</p>
+      <a href="/#/pois/{poi._id}" class="button">
         <span class="icon is-small">
           <i class="fas fa-folder-open"></i>
         </span>
-    </a>
-    <a on:click={forward(poi._id)} class="button">
+      </a>
+      <a on:click={forward(poi._id)} class="button">
         <span class="icon is-small">
           <i class="fas fa-trash"></i>
         </span>
-    </a>
+      </a>
+    </div>
+    {#if poi.gallery?.length}
+      <img class="image is-128x128" src={poi.gallery[0]}/>
+    {/if}
   </div>
 {/each}

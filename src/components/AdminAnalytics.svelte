@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Chart from 'svelte-frappe-charts';
   import { enumKeys } from "../data/enums/EnumUtils.js";
   import { Category } from "../data/enums/Category.js";
   import type { Poi } from '../data/PoiStore';
   import { onMount } from 'svelte';
   import type { User } from '../data/UserStore';
+  import MultiChart from "./MultiChart.svelte";
 
   export let pois: Poi[] = [];
   export let users: User[] = [];
@@ -67,15 +67,12 @@
 <h2 class="title">Placemark Analytics</h2>
 <div class="columns">
   <div class="column has-text-centered">
-    <h1 class="title is-4">Top 10 PoI Creators</h1>
-    <Chart data={poisPerUserData} type="bar"/>
+    <MultiChart data={poisPerUserData} type="bar" title="Top 10 PoI Creators"></MultiChart>
   </div>
   <div class="column has-text-centered">
-    <h1 class="title is-4">PoIs per Category</h1>
-    <Chart data={poisPerCategoryData} type="pie"/>
+    <MultiChart data={poisPerCategoryData} type="pie" title="PoIs per Category"></MultiChart>
   </div>
 </div>
 <div>
-  <h1 class="title is-4">Top 10 Most Visited PoIs</h1>
-  <Chart data={mostVisitedPoisData} type="bar"/>
+  <MultiChart data={mostVisitedPoisData} type="bar" title="Top 10 Most Visited PoIs"></MultiChart>
 </div>

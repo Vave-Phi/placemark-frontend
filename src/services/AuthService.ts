@@ -66,7 +66,7 @@ export class AuthService {
 			console.log(response.data);
 			return response.data;
 		} catch (error) {
-			return false;
+			return null;
 		}
 	}
 }

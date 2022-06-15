@@ -8,12 +8,13 @@
   const dispatch = createEventDispatcher();
 
   function forward() {
-    for (const key in query) {
-      if (!query[key]) {
-        delete query[key];
+    const filter = {...query};
+    for (const key in filter) {
+      if (!filter[key]) {
+        delete filter[key];
       }
     }
-    dispatch('filter', {query});
+    dispatch('filter', {query: filter});
   }
 
 </script>
@@ -25,7 +26,7 @@
     </div>
     <div class="select mr-4">
       <select name="category" bind:value={query.category}>
-        <option value="" selected>Select POI category</option>
+        <option value='' selected>All</option>
         {#each options as option}
           <option value="{option}">{option}</option>
         {/each}

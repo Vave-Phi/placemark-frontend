@@ -30,14 +30,14 @@
     const {id, image}: Poi = event.detail;
     const url = await poiService.uploadImage(id, image);
     if (url) {
-      poi.img = url;
+      poi.gallery = [...poi.gallery, url];
     }
   }
 
   async function deleteImage(event) {
-    const {id}: Poi = event.detail;
-    await poiService.deleteImage(id);
-    poi.img = null;
+    const {id, url}: Poi = event.detail;
+    poi.gallery = poi.gallery.filter(i => i != url);
+    await poiService.deleteImage(id, url);
   }
 
 </script>

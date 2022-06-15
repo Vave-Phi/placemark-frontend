@@ -3,7 +3,7 @@
   import Signup from "./pages/Signup.svelte"
   import Home from "./pages/Home.svelte";
 
-  import Router from "svelte-spa-router";
+  import Router, {push} from "svelte-spa-router";
   import {onMount, setContext} from "svelte";
 
   import {AuthService} from "./services/AuthService.ts";
@@ -32,6 +32,9 @@
 
   onMount(async () => {
     const isAdmin = await authService.isAdmin();
+    if (isAdmin == null) {
+      await push('/login');
+    }
     currentUser.update(it => ({...it, isAdmin}));
   })
 
