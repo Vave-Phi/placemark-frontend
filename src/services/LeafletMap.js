@@ -69,12 +69,17 @@ export class LeafletMap {
 		this.imap.setView(new L.LatLng(location.lat, location.lng), 8);
 	}
 
-	addMarker(location, popupText = '', layerTitle = 'default') {
+	addMarker(location, popupText = '', layerTitle = 'default', onclick = null) {
 		let group = {};
 		const marker = L.marker([location.lat, location.lng]);
 		if (popupText) {
-			const popup = L.popup({ autoClose: false, closeOnClick: false });
+			let popup = L.popup({ autoClose: false, closeOnClick: false, closeButton: false });
 			popup.setContent(popupText);
+			marker.on('click', () => {
+				if (onclick) {
+					onclick();
+				}
+			});
 			marker.bindPopup(popup);
 		}
 		if (!this.overlays[layerTitle]) {

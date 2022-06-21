@@ -63,10 +63,16 @@
       <div class="is-flex is-flex-wrap-wrap">
         {#each poi.gallery as img}
           <div>
-            <img src="{img}" alt="{poi.name}" class="image is-128x128">
+            <img src="{img}" alt="{poi.name}" class="image height-200">
           </div>
         {/each}
       </div>
     {/if}
   </div>
 </div>
+
+<style>
+    .height-200 {
+        height: 200px;
+    }
+</style>

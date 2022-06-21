@@ -29,7 +29,14 @@
       </a>
     </div>
     {#if poi.gallery?.length}
-      <img class="image is-128x128" src={poi.gallery[0]}/>
+      <img src={poi.gallery[0]} class="image height-150">
     {/if}
   </div>
 {/each}
+
+
+<style>
+    .height-150 {
+        height: 150px;
+    }
+</style>

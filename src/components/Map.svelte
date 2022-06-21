@@ -5,6 +5,7 @@
   import { Category } from '../data/enums/Category';
   import { enumKeys } from '../data/enums/EnumUtils';
   import type { Poi } from '../data/PoiStore';
+  import { push } from 'svelte-spa-router';
 
   export let items: Poi[] = [];
   export let id = 'map1';
@@ -22,7 +23,7 @@
   };
 
   export function addMarker(it: Poi, move = true) {
-    map.addMarker({lat: it.lat, lng: it.lng}, it.name, it.category);
+    map.addMarker({lat: it.lat, lng: it.lng}, it.name, it.category, () => goToPoi(it));
     if (move) map.moveTo(11, {lat: it.lat, lng: it.lng});
   }
 
@@ -33,6 +34,10 @@
     map.showLayerControl();
     items.forEach(it => addMarker(it, false));
   });
+
+  function goToPoi(poi: Poi){
+    push('/pois/' + poi._id);
+  }
 </script>
 
 
